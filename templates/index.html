@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System | Dashboard</title>
+    <!-- Link to the responsive CSS styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Library Management Dashboard</h1>
+            <p>Welcome to the centralised digital ledger for managing books and users.</p>
+        </header>
+
+        <!-- Main Navigation Grid -->
+        <main class="dashboard-grid">
+            <section class="card">
+                <h2>Inventory Management</h2>
+                <p>Manage the books table: view, update, or delete existing titles.</p>
+                <div class="action-links">
+                    <a href="{{ url_for('list_books') }}" class="btn">View All Books</a>
+                    <a href="{{ url_for('add_book') }}" class="btn">Add New Book</a>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Lending & Returns</h2>
+                <p>Track issued books and manage returns between users and inventory.</p>
+                <div class="action-links">
+                    <a href="{{ url_for('issue_book') }}" class="btn">Issue a Book</a>
+                    <a href="{{ url_for('view_issued') }}" class="btn">View Issued Books</a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2023 Library Management System - Powered by Flask & MySQL</p>
+        </footer>
+    </div>
+</body>
+</html>

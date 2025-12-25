@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Book Return | Library Management</title>
+    <!-- Link to the responsive CSS styling as required by the sources -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Process a Book Return</h1>
+            <p>Enter the details below to mark a borrowed book as returned.</p>
+            <nav>
+                <a href="{{ url_for('index') }}">Dashboard</a> | 
+                <a href="{{ url_for('view_issued') }}">View Issued Books</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- HTML form to facilitate the return of books via the Flask backend -->
+            <form action="{{ url_for('return_book_logic') }}" method="POST">
+                <div class="form-group">
+                    <label for="book_id">Book ID:</label>
+                    <!-- Matches the book_id column in the issued_books table -->
+                    <input type="number" id="book_id" name="book_id" placeholder="Enter the ID of the book being returned" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="user_id">User ID:</label>
+                    <!-- Matches the user_id column in the users table -->
+                    <input type="number" id="user_id" name="user_id" placeholder="Enter the ID of the borrower" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn">Confirm Return</button>
+                    <a href="{{ url_for('view_issued') }}" class="btn-cancel">Cancel</a>
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <p>Processing a return will remove the specific loan record from the active issued books list [1].</p>
+        </footer>
+    </div>
+</body>
+</html>

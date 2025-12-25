@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Book | Library Management System</title>
+    <!-- Link to the responsive CSS styling as specified in the requirements -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Issue a Book</h1>
+            <p>Fill out the form below to record a new book loan in the digital ledger.</p>
+            <nav>
+                <a href="{{ url_for('index') }}">Dashboard</a> | 
+                <a href="{{ url_for('list_books') }}">View Inventory</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- HTML form to create a record in the issued_books table [1] -->
+            <form action="{{ url_for('issue_book') }}" method="POST">
+                
+                <div class="form-group">
+                    <label for="book_id">Book ID:</label>
+                    <input type="number" id="book_id" name="book_id" placeholder="Enter Book ID (from books table)" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="user_id">User ID:</label>
+                    <input type="number" id="user_id" name="user_id" placeholder="Enter User ID (from users table)" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="issue_date">Issue Date:</label>
+                    <!-- Captures the date the book is being borrowed -->
+                    <input type="date" id="issue_date" name="issue_date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="return_date">Due Date / Return Date:</label>
+                    <!-- Captures the expected return date for the issued_books table [1] -->
+                    <input type="date" id="return_date" name="return_date" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn">Confirm Issue</button>
+                    <a href="{{ url_for('index') }}" class="btn-cancel">Cancel</a>
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <p>Ensure both the Book and User IDs exist in the system before submitting [2].</p>
+        </footer>
+    </div>
+</body>
+</html>

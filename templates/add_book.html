@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Book | Library Management</title>
+    <!-- Link to the responsive CSS styling as specified in the project requirements -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Add New Book to Inventory</h1>
+            <nav>
+                <a href="{{ url_for('index') }}">Dashboard</a> | 
+                <a href="{{ url_for('list_books') }}">View All Books</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- HTML form to create new book records in the MySQL database -->
+            <form action="{{ url_for('add_book') }}" method="POST">
+                <div class="form-group">
+                    <label for="title">Book Title:</label>
+                    <input type="text" id="title" name="title" placeholder="Enter the full title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="author">Author:</label>
+                    <input type="text" id="author" name="author" placeholder="Enter author name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="genre">Genre:</label>
+                    <input type="text" id="genre" name="genre" placeholder="e.g. Science Fiction, History">
+                </div>
+
+                <div class="form-group">
+                    <label for="qty">Quantity Available:</label>
+                    <input type="number" id="qty" name="qty" min="1" placeholder="Number of copies" required>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn">Add to Library</button>
+                    <a href="{{ url_for('list_books') }}" class="btn-cancel">Cancel</a>
+                </div>
+            </form>
+        </main>
+
+        <footer>
+            <p>Ensure all mandatory fields are filled before submitting to the ledger.</p>
+        </footer>
+    </div>
+</body>
+</html>

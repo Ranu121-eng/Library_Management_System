@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issued Books Ledger | Library Management</title>
+    <!-- Link to the project's responsive CSS styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Issued Books Ledger</h1>
+            <p>A centralised view of all current book loans and their respective due dates.</p>
+            <nav>
+                <a href="{{ url_for('index') }}">Dashboard</a> | 
+                <a href="{{ url_for('list_books') }}">View Inventory</a> | 
+                <a href="{{ url_for('issue_book') }}">Issue New Book</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Table to display data from the issued_books, books, and users tables -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Issue ID</th>
+                        <th>Book Title</th>
+                        <th>Borrowed By</th>
+                        <th>Issue Date</th>
+                        <th>Return Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in issued %}
+                    <tr>
+                        <td>{{ record.id }}</td>
+                        <td>**{{ record.title }}**</td>
+                        <td>{{ record.name }}</td>
+                        <td>{{ record.issue_date }}</td>
+                        <td>{{ record.return_date }}</td>
+                        <td class="action-links">
+                            <!-- Link to trigger the Return Book route -->
+                            <a href="{{ url_for('return_book', id=record.id) }}" class="btn">Mark as Returned</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6" style="text-align:center;">No books are currently issued.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </main>
+
+        <footer>
+            <p>Records are automatically updated when a book is marked as returned to the inventory.</p>
+        </footer>
+    </div>
+</body>
+</html>
