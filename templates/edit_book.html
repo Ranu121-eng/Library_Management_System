@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Book | Library Management System</title>
-    <!-- Link to the responsive CSS styling to maintain UI consistency -->
+    <title>Edit Book | Library Management</title>
+    <!-- Link to the responsive CSS styling as required [5, 6] -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Update Book Details</h1>
-            <p>Modify the information for: **{{ book.title }}**</p>
+            <h1>Edit Book Details</h1>
+            <p>Update the information for <strong>{{ book.title }}</strong> in the digital ledger.</p>
             <nav>
                 <a href="{{ url_for('index') }}">Dashboard</a> | 
                 <a href="{{ url_for('list_books') }}">Back to Inventory</a>
@@ -19,8 +19,7 @@
         </header>
 
         <main>
-            <!-- HTML form to update existing records in the MySQL books table -->
-            <!-- The action points to the specific book ID using Jinja2 syntax -->
+            <!-- Form submits to the edit_book route with the specific book ID [2] -->
             <form action="{{ url_for('edit_book', id=book.id) }}" method="POST">
                 <div class="form-group">
                     <label for="title">Book Title:</label>
@@ -39,18 +38,18 @@
 
                 <div class="form-group">
                     <label for="qty">Quantity in Stock:</label>
-                    <input type="number" id="qty" name="qty" value="{{ book.qty }}" min="0" required>
+                    <input type="number" id="qty" name="qty" value="{{ book.qty }}" required>
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn">Save Changes</button>
-                    <a href="{{ url_for('list_books') }}" class="btn-cancel">Discard Changes</a>
+                    <button type="submit" class="btn">Update Book Details</button>
+                    <a href="{{ url_for('list_books') }}" class="btn-cancel">Cancel</a>
                 </div>
             </form>
         </main>
 
         <footer>
-            <p>Note: Updating these details will immediately reflect in the public inventory list.</p>
+            <p>Editing this record will update the database entry for ID: {{ book.id }} [7].</p>
         </footer>
     </div>
 </body>

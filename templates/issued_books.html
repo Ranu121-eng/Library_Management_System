@@ -21,37 +21,40 @@
 
         <main>
             <!-- Table to display data from the issued_books, books, and users tables -->
-            <table>
-                <thead>
-                    <tr>
-                        <th>Issue ID</th>
-                        <th>Book Title</th>
-                        <th>Borrowed By</th>
-                        <th>Issue Date</th>
-                        <th>Return Date</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for record in issued %}
-                    <tr>
-                        <td>{{ record.id }}</td>
-                        <td>**{{ record.title }}**</td>
-                        <td>{{ record.name }}</td>
-                        <td>{{ record.issue_date }}</td>
-                        <td>{{ record.return_date }}</td>
-                        <td class="action-links">
-                            <!-- Link to trigger the Return Book route -->
-                            <a href="{{ url_for('return_book', id=record.id) }}" class="btn">Mark as Returned</a>
-                        </td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <td colspan="6" style="text-align:center;">No books are currently issued.</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <table class="table">
+    <thead>
+        <tr>
+            <th>Issue ID</th>
+            <th>Book Title</th>
+            <th>Borrowed By</th>
+            <th>Issue Date</th>
+            <th>Return Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for issue in issued %}
+        <tr>
+            <!-- Display the primary key of the issued record [1, 2] -->
+            <td>{{ issue.id }}</td>
+            
+            <!-- Book title retrieved from the 'books' table via JOIN [1, 2] -->
+            <td><strong>{{ issue.title }}</strong></td>
+            
+            <!-- FIX: Uses 'user_name' as defined in the SQL schema to show the borrower [1, 4] -->
+            <td>{{ issue.user_name }}</td> 
+            
+            <td>{{ issue.issue_date }}</td>
+            <td>{{ issue.return_date }}</td>
+            
+            <td>
+                <!-- Fixed endpoint to resolve BuildError; passes specific ID to the backend [2, 3] -->
+                <a href="{{ url_for('return_book', id=issue.id) }}" class="btn">Mark as Returned</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
         </main>
 
         <footer>
